@@ -18,7 +18,7 @@ class CreateOrderTable extends Migration
             $table->integer('id_requester');
             $table->string('request_role');
             $table->integer('id_requested')->nullable();
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->string('status');
             $table->integer('rating')->unsigned();
             $table->timestamps();

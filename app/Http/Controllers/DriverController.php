@@ -10,12 +10,12 @@ class DriverController extends Controller
 {
     public function index()
     {
-        return view('dashboard.driver');
+        return view('driver.dashboard');
     }
 
     public function daftarOrder(){
         $user = auth()->user();
-        $daftarOrder = Order::where(['id_requested', $user->id],['status','In_Progress']);
+        $daftarOrder = Order::where(['id_requested', $user->id],['status','In_Progress'])->first();
 
         return datatables()
             ->of($daftarOrder)
@@ -55,19 +55,19 @@ class DriverController extends Controller
             ->make(true);
     }
 
-    public function receiveOrder(){
-        $order = Order::where;
+    // public function receiveOrder(){
+    //     $order = Order::where;
 
-        $requested = User::findOrFail(auth()->user()->id);
-        $requested->status = 'Busy';
-    }
+    //     $requested = User::findOrFail(auth()->user()->id);
+    //     $requested->status = 'Busy';
+    // }
 
-    public function finsihOrder(){
+    // public function finsihOrder(){
 
-        $customer->status = 'Available';
+    //     $customer->status = 'Available';
         
-        $requested->status = 'Available';
+    //     $requested->status = 'Available';
 
-        $order->status = 'Finished';
-    }
+    //     $order->status = 'Finished';
+    // }
 }

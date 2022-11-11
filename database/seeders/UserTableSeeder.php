@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role' => 'administrator',
                 'phone_number' => '081213405817',
-                'status' => 'available',
+                'status' => 'Available',
             ],
             [
                 'name' => 'User',
@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role' => 'user',
                 'phone_number' => '081213405811',
-                'status' => 'available',
+                'status' => 'Available',
             ],
             [
                 'name' => 'Driver',
@@ -37,7 +37,15 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role' => 'driver',
                 'phone_number' => '081213405812',
-                'status' => 'available',
+                'status' => 'Available',
+            ],
+            [
+                'name' => 'Driver2',
+                'email' => 'driver2@gmail.com',
+                'password' => bcrypt('123'),
+                'role' => 'driver',
+                'phone_number' => '08121341112',
+                'status' => 'Available',
             ],
             [
                 'name' => 'Teknisi',
@@ -45,7 +53,7 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role' => 'teknisi',
                 'phone_number' => '081213405813',
-                'status' => 'available',
+                'status' => 'Available',
             ],
             
         );

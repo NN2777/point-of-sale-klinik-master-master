@@ -10,5 +10,6 @@ class Order extends Model
     use HasFactory;
 
     protected $table = 'order';
+    protected $primaryKey = 'id_order';
     protected $guarded = [];
 }

@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="deskripsi" class="col-lg-2 col-lg-offset-1 control-label">Deskripsi</label>
+                        <label for="deskripsi" class="col-lg-2 col-lg-offset-1 control-label">Kategori</label>
                         <div class="col-lg-6">
                             <input type="text" name="deskripsi" id="deskripsi" class="form-control" required autofocus>
                             <span class="help-block with-errors"></span>

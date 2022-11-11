@@ -15,40 +15,62 @@
     <!-- ./col -->
     <div class="col-lg-12">
         <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>Driver</h3>
-
-                <p>Total Produk</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-cubes"></i>
-            </div>
-        </div>
     </div>
 </div>
 <!-- /.row -->
 <!-- Main row -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Daftar Driver </h3>
-            </div>
-            <div class="box-body table-responsive">
-                    <table class="table table-stiped table-bordered">
-                        <thead>
-                            <th width="5%">No</th>
-                            <th>Nama</th>
-                            <th>No Telpon</th>
-                            <th>Status</th>
-                            <th width="15%"><i class="fa fa-cog"></i></th>
-                        </thead>
-                    </table>
-            </div>
-            <!-- /.box-header -->
+    <div class="login-box">
+
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <div class="login-logo">
+            <a href="{{ url('/') }}">
+                <img src="#" alt="logo.png" width="100">
+                {{-- {{ url($setting->path_logo) }} --}}
+            </a>
         </div>
-        <!-- /.box -->
+
+        <form action="{{ route('login') }}" method="post" class="form-login">
+            @csrf
+            <div class="form-group has-feedback @error('email') has-error @enderror">
+                <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autofocus>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                @error('email')
+                    <span class="help-block">{{ $message }}</span>
+                @else
+                <span class="help-block with-errors"></span>
+                @enderror
+            </div>
+            <div class="form-group has-feedback @error('password') has-error @enderror">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                @error('password')
+                    <span class="help-block">{{ $message }}</span>
+                @else
+                    <span class="help-block with-errors"></span>
+                @enderror
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> Remember Me
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
     </div>
     <!-- /.col -->
 </div>

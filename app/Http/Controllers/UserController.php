@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -19,16 +18,15 @@ class UserController extends Controller
     {   
         $role = $request->role;
 
-        return view('user.driver.driver');
-        // if ($role == 'driver'){
-        //     return view('user.driver.driver');
-        // }else if($role == 'teknisi'){
-        //     return view('user.teknisi.teknisi');
-        // }else if($role== 'cs'){
-        //     return view('user.cs.cs');
-        // }else {
-        //     return response()->json('data tidka ada', 200);
-        // }
+        if ($role == 'driver'){
+            return view('user.driver.driver');
+        }else if($role == 'teknisi'){
+            return view('user.teknisi.teknisi');
+        }else if($role== 'cs'){
+            return view('user.cs.cs');
+        }else {
+            return response()->json('data tidka ada', 200);
+        }
     }
 
     // public function driverpage(){
@@ -53,8 +51,29 @@ class UserController extends Controller
         $customer->status = 'Ordering';
         $customer->update();
 
+        // dd($customer);
         return response()->json('Data berhasil disimpan', 200);
     }
+
+    public function detail(){
+        return view('user.driver.detail');
+    }
+
+    public function batalOrder($id)
+    {  
+        $order = Order::where([['id_requester', auth()->user()->id], ['id_requested', $id], ['status', 'Waiting']])->first();
+        // dd($order);
+        $order->status = 'Cancelled';
+        $order->rating = 0;
+        $order->update();
+
+        $customer = User::findOrFail(auth()->user()->id);
+        $customer->status = 'Available';
+        $customer->update();
+
+        return response()->json('Berhasil dibatalkan', 200);
+    }
+
 
     public function driverdata()
     {   
@@ -71,7 +90,7 @@ class UserController extends Controller
             })
             ->addColumn('status', function ($driverdata) {
                 $status = $driverdata->status ?? '';
-                if($status=='available'){
+                if($status=='Available'){
                     return '<span class="label label-success">'. $status .'</spa>';
                 }else {
                     return '<span class="label label-danger">'. $status .'</spa>';
@@ -81,10 +100,23 @@ class UserController extends Controller
                 $status = auth()->user()->status;
                 if($status == "Ordering"){
                     return '
-                <div class="btn-group">
-                    <a href="'. route('user.order', $driverdata->id) .'" class="btn btn-xs btn-primary btn-flat disabled">Ordering</a>
-                </div>
-                ';
+                            <div class="btn-group">
+                                <a href="'. route('user.order', $driverdata->id) .'" class="btn btn-xs btn-primary btn-flat disabled">Ordering</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="'. route('user.batal', $driverdata->id) .'" class="btn btn-xs btn-primary btn-flat">Cancel Order</a>
+                             </div>
+                            ';
+                    // if($order->status == 'Waiting'){
+                    //     return '
+                    //         <div class="btn-group">
+                    //             <a href="'. route('user.order', $driverdata->id) .'" class="btn btn-xs btn-primary btn-flat disabled">Ordering</a>
+                    //         </div>
+                    //         <div class="btn-group">
+                    //             <a href="'. route('user.order', $driverdata->id) .'" class="btn btn-xs btn-primary btn-flat disabled">Ordering</a>
+                    //         </div>
+                    //         ';
+                    // }else {
                 }else {
                     return '
                 <div class="btn-group">
